@@ -4,8 +4,7 @@ A pack of simple solutions for making console output prettier.
 ```
 go get github.com/lazybark/go-pretty-code
 ```
-## Features
-Text colors for console output:
+## Text colors for console output
 ```
 go get github.com/lazybark/go-pretty-code/console
 ```
@@ -20,13 +19,14 @@ Foreground & background:
 - ![#FFFFFF](https://via.placeholder.com/15/FFFFFF/000000?text=+) `console.ForeWhite / BackWhite`
 - ![#000000](https://via.placeholder.com/15/000000/000000?text=+) `console.BackBlack`
 
-## Combined formating
+### Combined formating
 ```
 fmt.Println(console.ForeBlue(console.BackWhite("Blue & white")))
 fmt.Println(console.ForeGreen(console.TextBlink("Blinking green")))
 ```
-## Using variables to set color manually
+### Using variables to set color manually
 ```
 console.TextColorRed + "Colored text can be splitted by " + console.TextReset
 console.TextColorRed + "Colored text can be splitted by " + console.ResetText()
 ```
+## Colorful logging using Uber Zap
