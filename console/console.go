@@ -1,5 +1,7 @@
 package console
 
+import "fmt"
+
 var (
 	TextColorReset  = "\033[0m"
 	TextColorRed    = "\033[31m"
@@ -11,3 +13,7 @@ var (
 	TextColorGray   = "\033[37m"
 	TextColorWhite  = "\033[97m"
 )
+
+func FormatYellow(args ...interface{}) string {
+	return TextColorYellow + fmt.Sprint(args...) + TextColorReset
+}
