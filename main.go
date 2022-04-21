@@ -17,5 +17,5 @@ func main() {
 	fmt.Println(console.FormatCyan("TextColorCyan"))
 	fmt.Println(console.FormatGray("TextColorGray"))
 	fmt.Println(console.FormatWhite("TextColorWhite (ha-ha)"))
-	fmt.Println("\n" + console.TextColorRed + "Some red text can be splitted by " + console.ResetColor() + "console.ResetColor() and become default." + console.TextColorGreen + " Then it can change color again." + console.ResetColor() + console.TextColorCyan + " You can even change color of console path!" + console.TextColorPurple)
+	fmt.Println("\n" + console.TextColorRed + "Colored text can be splitted by " + console.ResetColor() + "console.ResetColor() and become default." + console.TextColorGreen + " Then it can change color again." + console.ResetColor() + console.TextColorCyan + " You can even change color of console path!" + console.TextColorPurple)
 }
