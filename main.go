@@ -9,13 +9,13 @@ import (
 func main() {
 	fmt.Println("This is simple prettifier for Go")
 	fmt.Println("===Examples===")
-	fmt.Println(console.TextColorRed + "TextColorRed" + console.TextColorReset)
-	fmt.Println(console.TextColorGreen + "TextColorGreen" + console.TextColorReset)
+	fmt.Println(console.FormatRed("TextColorRed"))
+	fmt.Println(console.FormatGreen("TextColorGreen"))
 	fmt.Println(console.FormatYellow("TextColorYellow"))
-	fmt.Println(console.TextColorBlue + "TextColorBlue" + console.TextColorReset)
-	fmt.Println(console.TextColorPurple + "TextColorPurple" + console.TextColorReset)
-	fmt.Println(console.TextColorCyan + "TextColorCyan" + console.TextColorReset)
-	fmt.Println(console.TextColorGray + "TextColorGray" + console.TextColorReset)
-	fmt.Println(console.TextColorWhite + "TextColorWhite (ha-ha)" + console.TextColorReset)
-
+	fmt.Println(console.FormatBlue("TextColorBlue"))
+	fmt.Println(console.FormatPurple("TextColorPurple"))
+	fmt.Println(console.FormatCyan("TextColorCyan"))
+	fmt.Println(console.FormatGray("TextColorGray"))
+	fmt.Println(console.FormatWhite("TextColorWhite (ha-ha)"))
+	fmt.Println("\n" + console.TextColorRed + "Some red text can be splitted by " + console.ResetColor() + "and become default")
 }
