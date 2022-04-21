@@ -31,6 +31,10 @@ func Double(filepath string, truncate bool, level zapcore.Level) (*Logger, error
 	fileEncoder := zapcore.NewConsoleEncoder(pe)
 	consoleEncoder := zapcore.NewConsoleEncoder(pe)
 
+	// We could not use cores with 1+ recievers
+	// As we will pass console colors that will spoil text output in log files
+	// For this case we use 2+ separate recievers: files and console should be separated
+
 	// Console-only logger
 	coreCon := zapcore.NewTee(
 		zapcore.NewCore(consoleEncoder, zapcore.AddSync(os.Stdout), level),
@@ -156,18 +160,26 @@ func (l Logger) WarnBackYellow(args ...interface{}) {
 }
 
 func (l Logger) Fatal(args ...interface{}) {
+	// Fatal could be passed only to one reciever
+	// As it calls os.Exit(1) after making a log entry
+	if l.sugaredConsole != nil {
+		defer l.sugaredFile.Fatal(fmt.Sprint(args...))
+		l.sugaredConsole.Panic(console.ForeRed(fmt.Sprint(args...)))
+	}
+	// This will be ignored if previous condition isn't nil
 	if l.sugaredFile != nil {
 		l.sugaredFile.Fatal(fmt.Sprint(args...))
-	}
-	if l.sugaredConsole != nil {
-		l.sugaredConsole.Fatal(console.ForeRed(fmt.Sprint(args...)))
 	}
 }
 
 func (l Logger) FatalBackRed(args ...interface{}) {
+	// Fatal could be passed only to one reciever
+	// As it calls os.Exit(1) after making a log entry
 	if l.sugaredFile != nil {
-		l.sugaredFile.Fatal(fmt.Sprint(args...))
+		defer l.sugaredFile.Fatal(fmt.Sprint(args...))
+		l.sugaredConsole.Panic(console.BackRed(fmt.Sprint(args...)))
 	}
+	// This will be ignored if previous condition isn't nil
 	if l.sugaredConsole != nil {
 		l.sugaredConsole.Fatal(console.BackRed(fmt.Sprint(args...)))
 	}
