@@ -29,4 +29,17 @@ fmt.Println(console.ForeGreen(console.TextBlink("Blinking green")))
 console.TextColorRed + "Colored text can be splitted by " + console.TextReset
 console.TextColorRed + "Colored text can be splitted by " + console.ResetText()
 ```
+**WARNING**
+<br>
+Colors will not work in standart Windows console. To get colors on Windows (instead of weird ANSI) use [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/install)
 ## Colorful logging using Uber Zap
+Pretty logger in this mod is just a wrap around go.uber.org/zap. It's designed to make logging more flexible for projects that require console+file base output but with different (customizable) rules for each: colors, formatting, etc.
+<br>
+There are some prepared variants in github.com/lazybark/go-pretty-code/logs but many more can be created just by combining existing functions.
+<br>
+Basic use: logs.Double(PATH_TO_LOGFILE, TRUNCATE_FILE, ZAP_LOGGING_LEVEL)
+```
+logger, _ := logs.FileOnly("some/log.txt", false, zap.InfoLevel) // Will use only specified file as output
+logger, _ := logs.ConsoleOnly(zap.InfoLevel) // Console-only, for just pretty colorful logs
+logger, _ := logs.Double("some/log.txt", false, zap.InfoLevel) // Will use both
+```
