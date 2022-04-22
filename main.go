@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/lazybark/go-pretty-code/console"
+	"github.com/lazybark/go-pretty-code/logs"
+	"go.uber.org/zap"
 )
 
 func main() {
@@ -38,4 +40,7 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("\n" + console.TextColorRed + "Colored text can be splitted by " + console.ResetText() + "console.ResetText() and become default." + console.TextColorGreen + " Then it can change color again." + console.ResetText() + console.TextColorCyan + " You can even change color of console path if you leave a console.Fore___ var at the end (without console.ResetText())." + console.ResetText())
+
+	logger, _ := logs.Double("some\\log.txt", false, zap.InfoLevel)
+	logger.Fatal("That's bad")
 }
