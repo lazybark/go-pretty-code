@@ -164,9 +164,9 @@ func (l Logger) Fatal(args ...interface{}) {
 	// As it calls os.Exit(1) after making a log entry
 	if l.sugaredConsole != nil {
 		defer l.sugaredFile.Fatal(fmt.Sprint(args...))
-		l.sugaredConsole.Panic(console.ForeRed(fmt.Sprint(args...)))
+		l.sugaredConsole.Panic(console.ForeRed("(fatal) ", fmt.Sprint(args...)))
 	}
-	// This will be ignored if previous condition isn't nil
+	// This will be ignored if previous condition isn't <nil>
 	if l.sugaredFile != nil {
 		l.sugaredFile.Fatal(fmt.Sprint(args...))
 	}
@@ -177,9 +177,9 @@ func (l Logger) FatalBackRed(args ...interface{}) {
 	// As it calls os.Exit(1) after making a log entry
 	if l.sugaredFile != nil {
 		defer l.sugaredFile.Fatal(fmt.Sprint(args...))
-		l.sugaredConsole.Panic(console.BackRed(fmt.Sprint(args...)))
+		l.sugaredConsole.Panic(console.BackRed("(fatal) ", fmt.Sprint(args...)))
 	}
-	// This will be ignored if previous condition isn't nil
+	// This will be ignored if previous condition isn't <nil>
 	if l.sugaredConsole != nil {
 		l.sugaredConsole.Fatal(console.BackRed(fmt.Sprint(args...)))
 	}
