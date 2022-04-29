@@ -41,6 +41,14 @@ func main() {
 	fmt.Println()
 	fmt.Println("\n" + console.TextColorRed + "Colored text can be splitted by " + console.ResetText() + "console.ResetText() and become default." + console.TextColorGreen + " Then it can change color again." + console.ResetText() + console.TextColorCyan + " You can even change color of console path if you leave a console.Fore___ var at the end (without console.ResetText())." + console.ResetText())
 
-	logger, _ := logs.Double("some\\log.txt", false, zap.InfoLevel)
-	logger.Fatal("That's bad")
+	logger, err := logs.Double("some\\log.txt", false, zap.InfoLevel)
+	if err != nil {
+		fmt.Println(err)
+	}
+	logger.InfoBackBlue("That's ok")
+	logger.InfoBackCyan("That's ok")
+	logger.InfoGreen("That's ok")
+	logger.Warn("That's not so good")
+	logger.InfoRed("I have a bad feeling about this...")
+	logger.Fatal("Told you!")
 }

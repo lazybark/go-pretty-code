@@ -22,7 +22,7 @@ func Double(filepath string, truncate bool, level zapcore.Level) (*Logger, error
 
 	logFile, err := l.MakeLogPath(filepath, truncate)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("[Double] can not MakeLogPath -> %w", err)
 	}
 
 	pe := zap.NewProductionEncoderConfig()
@@ -60,7 +60,7 @@ func FileOnly(filepath string, truncate bool, level zapcore.Level) (*Logger, err
 
 	logFile, err := l.MakeLogPath(filepath, truncate)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("[FileOnly] can not MakeLogPath -> %w", err)
 	}
 
 	pe := zap.NewProductionEncoderConfig()
@@ -98,7 +98,7 @@ func ConsoleOnly(level zapcore.Level) *Logger {
 func (l Logger) MakeLogPath(path string, truncate bool) (*os.File, error) {
 	dir, _ := filepath.Split(path)
 	if err := os.MkdirAll(dir, os.ModePerm); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("[MakeLogPath] can not MkdirAll -> %w", err)
 	}
 
 	flags := os.O_CREATE | os.O_APPEND
@@ -108,7 +108,7 @@ func (l Logger) MakeLogPath(path string, truncate bool) (*os.File, error) {
 
 	logFile, err := os.OpenFile(path, flags, 0666)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("[MakeLogPath] can not OpenFile -> %w", err)
 	}
 
 	return logFile, nil
